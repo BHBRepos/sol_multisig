@@ -1,7 +1,7 @@
 # Multisig Wallet Test on Devnet
 
 ## Introduction
-This project involves testing a multisig wallet on the Solana Devnet. Four wallets are set up to automatically agree to multisig test transactions. This feature will be removed once the basic version is complete. User interaction and unanimity of votes are required for transactions to proceed. Additionally, measures will be implemented to handle inactive votes and prevent changes to the contract unless all parties vote yes.
+This project involves testing a multisig wallet on the Solana Devnet. Four wallets are set up to automatically agree to multisig test transactions. This auto feature will be removed once the basic version is complete, and sigs will be pushed to users to. User interaction and unanimity of votes are required for transactions to proceed. Additionally, measures will be implemented to handle inactive members for long periods of time (quit the project etc) and prevent changes to the contract unless all parties vote yes.
 
 ## Project ID on Solscan
 [Project ID on Solscan](https://solscan.io/account/9KaExL5gFjLvE1Z4TRsYDLdguarb6geuo4MaQ6YLk5JB?cluster=devnet)
