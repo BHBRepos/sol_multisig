@@ -22,11 +22,14 @@ const SPACE: usize = 8 + 4 + 4 + (32 * MAX_OWNERS);  // Precisely calculated spa
 
 
 ## Deployment
+
 When deploying, the following steps are taken:
 
-Deploying cluster: https://api.devnet.solana.com
-Upgrade authority: /home/chris/.config/solana/id.json
-Deploying program "solana_multisig"...
-Program path: /home/chris/solana-multisig/solana-multisig/target/deploy/solana_multisig.so...
-Recovery of the intermediate account's ephemeral keypair file with solana-keygen recover and a 12-word seed phrase is required to resume a deploy.
+- Deploying cluster: https://api.devnet.solana.com
+- Upgrade authority: `/home/chris/.config/solana/id.json`
+- Deploying program "solana_multisig"...
+- Program path: `/home/chris/solana-multisig/solana-multisig/target/deploy/solana_multisig.so`
+- Recovery of the intermediate account's ephemeral keypair file with `solana-keygen recover` and a 12-word seed phrase is required to resume a deploy.
+
 Error: Deployment failed due to RPC response error -32002: Transaction simulation failed: Error processing Instruction 0: account data too small for instruction.
+
