@@ -1,0 +1,9 @@
+[0m[38;5;8m[[0m2024-05-03T16:10:57.824229214Z [0m[32mINFO [0m solana_test_validator[0m[38;5;8m][0m solana-validator 1.18.12 (src:b9c13825; feat:4215500110, client:SolanaLabs)
+[0m[38;5;8m[[0m2024-05-03T16:10:57.824261348Z [0m[32mINFO [0m solana_test_validator[0m[38;5;8m][0m Starting validator with: ArgsOs {
+        inner: [
+            "solana-test-validator",
+        ],
+    }
+[0m[38;5;8m[[0m2024-05-03T16:10:57.824316838Z [0m[33mWARN [0m solana_perf[0m[38;5;8m][0m CUDA is disabled
+[0m[38;5;8m[[0m2024-05-03T16:10:57.824336434Z [0m[32mINFO [0m solana_perf[0m[38;5;8m][0m AVX detected
+[0m[38;5;8m[[0m2024-05-03T16:10:57.824343343Z [0m[1m[31mERROR[0m solana_perf[0m[38;5;8m][0m Incompatible CPU detected: missing AVX2 support. Please build from source on the target
