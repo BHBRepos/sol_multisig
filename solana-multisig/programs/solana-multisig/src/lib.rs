@@ -14,7 +14,6 @@ pub mod solana_multisig {
     }
 
     pub fn execute_transaction(ctx: Context<ExecuteTransaction>, amount: u64) -> Result<()> {
-        // Transfer SOL from the multisig wallet to the recipient
         let multisig = &ctx.accounts.multisig;
         let recipient = &ctx.accounts.recipient;
 
@@ -43,7 +42,7 @@ pub mod solana_multisig {
 
 #[derive(Accounts)]
 pub struct Initialize<'info> {
-    #[account(init, payer = payer, space = 8 + 40 + 100)]
+    #[account(init, payer = payer, space = 148)] // Adjusted space
     pub multisig: Account<'info, Multisig>,
     #[account(mut)]
     pub payer: Signer<'info>,
@@ -74,3 +73,4 @@ pub enum ErrorCode {
     #[msg("Invalid number of signers")]
     InvalidSigners,
 }
+
