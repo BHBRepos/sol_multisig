@@ -2,7 +2,10 @@
 Want to of course remove auto feature once this basic version complete.
 Require user interaction and unanimity of votes
 Also want to add a boot if inactive vote etc if someone quits so wallet not stuck
+And remove ability to change contract once done, unless all vote yes
 
+
+Project ID on solscan - https://solscan.io/account/9KaExL5gFjLvE1Z4TRsYDLdguarb6geuo4MaQ6YLk5JB?cluster=devnet
 
 
 
