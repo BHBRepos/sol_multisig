@@ -1,9 +1,7 @@
-4 wallets auto agree to a multisig test transaction
+4 wallets auto agree to a multisig test transaction on dev net, all test sol for now
 Want to of course remove auto feature once this basic version complete.
 Require user interaction and unanimity of votes
 Also want to add a boot if inactive vote etc if someone quits so wallet not stuck
-
-
 
 
 
