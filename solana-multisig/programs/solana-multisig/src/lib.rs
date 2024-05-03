@@ -2,6 +2,9 @@ use anchor_lang::prelude::*;
 
 declare_id!("9KaExL5gFjLvE1Z4TRsYDLdguarb6geuo4MaQ6YLk5JB");
 
+const MAX_OWNERS: usize = 4;
+const SPACE: usize = 8 + 1 + 4 + (32 * MAX_OWNERS);  // Adjusted for maximum padding and structure
+
 #[program]
 pub mod solana_multisig {
     use super::*;
@@ -42,7 +45,7 @@ pub mod solana_multisig {
 
 #[derive(Accounts)]
 pub struct Initialize<'info> {
-    #[account(init, payer = payer, space = 148)] // Adjusted space
+    #[account(init, payer = payer, space = SPACE)]
     pub multisig: Account<'info, Multisig>,
     #[account(mut)]
     pub payer: Signer<'info>,
@@ -53,10 +56,6 @@ pub struct Initialize<'info> {
 pub struct ExecuteTransaction<'info> {
     #[account(mut)]
     pub multisig: Account<'info, Multisig>,
-    /// CHECK: The recipient account is safe to use here without additional checks because the necessary
-    /// validations are performed within the `execute_transaction` function. Specifically, we ensure that
-    /// all owners have signed the transaction before invoking the transfer, and the recipient account
-    /// does not need to uphold specific state or ownership properties beyond being a valid account.
     #[account(mut)]
     pub recipient: AccountInfo<'info>,
     pub system_program: Program<'info, System>,
@@ -73,4 +72,5 @@ pub enum ErrorCode {
     #[msg("Invalid number of signers")]
     InvalidSigners,
 }
+
 
