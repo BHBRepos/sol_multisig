@@ -3,7 +3,7 @@ use anchor_lang::prelude::*;
 declare_id!("9KaExL5gFjLvE1Z4TRsYDLdguarb6geuo4MaQ6YLk5JB");
 
 const MAX_OWNERS: usize = 4;
-const SPACE: usize = 8 + 1 + 4 + (32 * MAX_OWNERS);  // Adjusted for maximum padding and structure
+const SPACE: usize = 8 + 4 + 4 + (32 * MAX_OWNERS);  // Precisely calculated space
 
 #[program]
 pub mod solana_multisig {
@@ -45,7 +45,7 @@ pub mod solana_multisig {
 
 #[derive(Accounts)]
 pub struct Initialize<'info> {
-    #[account(init, payer = payer, space = SPACE)]
+    #[account(init, payer = payer, space = SPACE)]  // Updated space
     pub multisig: Account<'info, Multisig>,
     #[account(mut)]
     pub payer: Signer<'info>,
@@ -65,7 +65,6 @@ pub struct ExecuteTransaction<'info> {
     pub system_program: Program<'info, System>,
 }
 
-
 #[account]
 pub struct Multisig {
     pub owners: Vec<Pubkey>,
@@ -77,5 +76,3 @@ pub enum ErrorCode {
     #[msg("Invalid number of signers")]
     InvalidSigners,
 }
-
-
