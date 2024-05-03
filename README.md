@@ -7,7 +7,7 @@ This project involves testing a multisig wallet on the Solana Devnet. Four walle
 [Project ID on Solscan](https://solscan.io/account/9KaExL5gFjLvE1Z4TRsYDLdguarb6geuo4MaQ6YLk5JB?cluster=devnet)
 
 ## Issue
-The size of the contract is too small, and adjustments need to be made in the lib.rs file.
+The size of the SPACE in lib.rs is too small, and adjustments need to be made in the lib.rs file.
 
 ```rust
 // /solana-multisig/solana-multisig/programs/solana-multisig/src/lib.rs
