@@ -17,7 +17,7 @@ use anchor_lang::prelude::*;
 declare_id!("9KaExL5gFjLvE1Z4TRsYDLdguarb6geuo4MaQ6YLk5JB");
 
 const MAX_OWNERS: usize = 4;
-const SPACE: usize = 8 + 4 + 4 + (32 * MAX_OWNERS);  // Precisely calculated space
+const SPACE: usize = 8 + 4 + 4 + (32 * MAX_OWNERS);  // Precisely calculated space ```
 
 
 
