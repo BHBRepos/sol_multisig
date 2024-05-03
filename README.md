@@ -20,6 +20,7 @@ const MAX_OWNERS: usize = 4;
 const SPACE: usize = 8 + 4 + 4 + (32 * MAX_OWNERS);  // Precisely calculated space
 
 
+
 ## Deployment
 When deploying, the following steps are taken:
 
