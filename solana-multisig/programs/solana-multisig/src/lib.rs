@@ -56,10 +56,15 @@ pub struct Initialize<'info> {
 pub struct ExecuteTransaction<'info> {
     #[account(mut)]
     pub multisig: Account<'info, Multisig>,
+    /// CHECK: The recipient account is safe to use here without additional checks because the necessary
+    /// validations are performed within the `execute_transaction` function. Specifically, we ensure that
+    /// all owners have signed the transaction before invoking the transfer, and the recipient account
+    /// does not need to uphold specific state or ownership properties beyond being a valid account.
     #[account(mut)]
     pub recipient: AccountInfo<'info>,
     pub system_program: Program<'info, System>,
 }
+
 
 #[account]
 pub struct Multisig {
