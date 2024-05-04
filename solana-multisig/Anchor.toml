@@ -5,7 +5,7 @@ resolution = true
 skip-lint = false
 
 [programs.devnet]
-sol_multisig = "9KaExL5gFjLvE1Z4TRsYDLdguarb6geuo4MaQ6YLk5JB"
+sol_multisig = "7ju5oNN46qCv2q6hNfADv4LhTaBhe3w4MMW88gw29p92"
 
 [registry]
 url = "https://api.apr.dev"

@@ -1,26 +1,31 @@
 use anchor_lang::prelude::*;
+use std::mem;
 
 declare_id!("9KaExL5gFjLvE1Z4TRsYDLdguarb6geuo4MaQ6YLk5JB");
 
 const MAX_OWNERS: usize = 4;
-const SPACE: usize = 8 + 4 + 4 + (32 * MAX_OWNERS);
+const SPACE: usize = 8 + 4 + (32 * MAX_OWNERS) + 4;  // Include potential padding for `threshold`
 
 #[program]
 pub mod solana_multisig {
     use super::*;
 
-    
     pub fn initialize(ctx: Context<Initialize>, owners: Vec<Pubkey>) -> Result<()> {
         // Log the size of each component and the total struct size
-        println!("Size of Multisig: {}", std::mem::size_of::<Multisig>());
-        println!("Size of Pubkey: {}", std::mem::size_of::<Pubkey>());
-        println!("Size of u8: {}", std::mem::size_of::<u8>());
+        msg!("Size of Multisig: {}", mem::size_of::<Multisig>());
+        msg!("Size of Pubkey: {}", mem::size_of::<Pubkey>());
+        msg!("Size of u8: {}", mem::size_of::<u8>());
 
         let multisig = &mut ctx.accounts.multisig;
         multisig.owners = owners;
         multisig.threshold = MAX_OWNERS as u8;
         Ok(())
     }
+
+    // Additional functions...
+}
+
+// Additional structs and implementations...
 
     pub fn execute_transaction(ctx: Context<ExecuteTransaction>, amount: u64) -> Result<()> {
         let multisig = &ctx.accounts.multisig;
@@ -45,7 +50,7 @@ pub mod solana_multisig {
 
         Ok(())
     }
-}
+
 
 #[derive(Accounts)]
 pub struct Initialize<'info> {
@@ -80,8 +85,3 @@ pub enum ErrorCode {
     #[msg("Invalid number of signers")]
     InvalidSigners,
 }
-
-// This file contains the Rust code for the Solana multisig program.
-// It defines the necessary structs, instructions, and error codes for the multisig functionality.
-// The `initialize` instruction sets up the multisig account with the provided owners and threshold.
-// The `execute_transaction` instruction allows executing a transaction with the required number of signers./// CHECK: The recipient field is used in conjunction with the Solana system instruction to transfer funds. Safety checks for the transfer operation are handled by the Solana runtime.
