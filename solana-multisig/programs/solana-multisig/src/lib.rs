@@ -3,7 +3,7 @@ use anchor_lang::prelude::*;
 declare_id!("9KaExL5gFjLvE1Z4TRsYDLdguarb6geuo4MaQ6YLk5JB");
 
 const MAX_OWNERS: usize = 4;
-const SPACE: usize = 8 + 4 + 4 + (32 * MAX_OWNERS);
+const SPACE: usize = 8 + 4 + 4 + (1100 * MAX_OWNERS);
 
 #[program]
 pub mod solana_multisig {
@@ -54,7 +54,10 @@ pub struct Initialize<'info> {
 pub struct ExecuteTransaction<'info> {
     #[account(mut)]
     pub multisig: Account<'info, Multisig>,
-     /// CHECK: The recipient field is used in conjunction with the Solana system instruction to transfer funds. Safety checks for the transfer operation are handled by the Solana runtime.
+    /// CHECK: The recipient account is safe to use here without additional checks because the necessary
+    /// validations are performed within the `execute_transaction` function. Specifically, we ensure that
+    /// all owners have signed the transaction before invoking the transfer, and the recipient account
+    /// does not need to uphold specific state or ownership properties beyond being a valid account.
     #[account(mut)]
     pub recipient: AccountInfo<'info>,
     pub system_program: Program<'info, System>,
@@ -76,4 +79,3 @@ pub enum ErrorCode {
 // It defines the necessary structs, instructions, and error codes for the multisig functionality.
 // The `initialize` instruction sets up the multisig account with the provided owners and threshold.
 // The `execute_transaction` instruction allows executing a transaction with the required number of signers./// CHECK: The recipient field is used in conjunction with the Solana system instruction to transfer funds. Safety checks for the transfer operation are handled by the Solana runtime.
-/// CHECK: The recipient field is used in conjunction with the Solana system instruction to transfer funds. Safety checks for the transfer operation are handled by the Solana runtime.
