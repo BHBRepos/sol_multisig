@@ -28,23 +28,9 @@ class MultisigWallet {
             console.log('Loaded existing multisig wallet:', existingMultisig.publicKey.toBase58());
             return new MultisigWallet(existingMultisig.publicKey, signers);
         } catch {
-            // If no existing wallet, create a new one
             const multisig = new Keypair();
             saveKeypair(multisig, filename);
             console.log('Created new multisig wallet:', multisig.publicKey.toBase58());
-
-            // Initialize the multisig wallet with the provided signers
-            const instruction = new web3.TransactionInstruction({
-                keys: [
-                    { pubkey: multisig.publicKey, isSigner: false, isWritable: true },
-                    ...signers.map(signer => ({ pubkey: signer.publicKey, isSigner: false, isWritable: false })),
-                ],
-                programId,
-                data: Buffer.alloc(0),
-            });
-            const transaction = new web3.Transaction().add(instruction);
-            await web3.sendAndConfirmTransaction(connection, transaction, [multisig]);
-
             return new MultisigWallet(multisig.publicKey, signers);
         }
     }
@@ -90,9 +76,30 @@ async function main() {
     );
 
     const recipient = new Keypair().publicKey;
-    await multisigWallet.sendTransaction(connection, recipient, web3.LAMPORTS_PER_SOL * 0.001);
+    const amount = await promptAmount();
+    await multisigWallet.sendTransaction(connection, recipient, amount);
 
     console.log('Multisig transaction has been sent!');
 }
 
+async function promptAmount() {
+    const readline = require('readline').createInterface({
+        input: process.stdin,
+        output: process.stdout,
+    });
+
+    return new Promise((resolve) => {
+        readline.question('Enter the amount of SOL to transfer: ', (amount) => {
+            readline.close();
+            resolve(parseFloat(amount) * web3.LAMPORTS_PER_SOL);
+        });
+    });
+}
+
 main();
+
+// This script manages the multisig wallet functionality.
+// It provides functions to create a new multisig wallet or load an existing one from a file.
+// The `MultisigWallet` class encapsulates the multisig wallet's public key and signers.
+// The `sendTransaction` method allows sending a transaction from the multisig wallet, requiring signatures from all signers.
+// The script prompts the user to enter the amount of SOL to transfer and sends the transaction to the specified recipient.

@@ -2,8 +2,7 @@ const fs = require('fs');
 const web3 = require('@solana/web3.js');
 const { Keypair, Connection, LAMPORTS_PER_SOL } = web3;
 
-async function checkAndAirdropIfNeeded(walletPath) {
-    const connection = new Connection(web3.clusterApiUrl('devnet'), 'confirmed');
+async function checkAndAirdropIfNeeded(connection, walletPath) {
     const secretKey = JSON.parse(fs.readFileSync(walletPath, 'utf8'));
     const signer = Keypair.fromSecretKey(new Uint8Array(secretKey));
     
@@ -20,13 +19,17 @@ async function checkAndAirdropIfNeeded(walletPath) {
 }
 
 async function main() {
-    await checkAndAirdropIfNeeded('signer1.json');
-    await checkAndAirdropIfNeeded('signer2.json');
-    await checkAndAirdropIfNeeded('signer3.json');
-    await checkAndAirdropIfNeeded('signer4.json');
+    const connection = new Connection(web3.clusterApiUrl('devnet'), 'confirmed');
+    const walletPaths = ['signer1.json', 'signer2.json', 'signer3.json', 'signer4.json'];
+
+    for (const walletPath of walletPaths) {
+        await checkAndAirdropIfNeeded(connection, walletPath);
+    }
 }
 
 main();
 
-//Here’s a unified Node.js script that checks balances and requests airdrops for all four wallets. 
-//This approach avoids redundancy and makes it easier to manage wallet readiness for your multisig operations.
+// This script checks the balance of each signer wallet and requests an airdrop if the balance is below 0.1 SOL.
+// It ensures that all signer wallets have sufficient funds for testing purposes.
+// The script iterates through the wallet paths and calls the `checkAndAirdropIfNeeded` function for each wallet.
+// If the balance is below the threshold, it requests an airdrop to top up the wallet.
