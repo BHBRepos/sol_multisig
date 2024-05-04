@@ -54,6 +54,7 @@ pub struct Initialize<'info> {
 pub struct ExecuteTransaction<'info> {
     #[account(mut)]
     pub multisig: Account<'info, Multisig>,
+     /// CHECK: The recipient field is used in conjunction with the Solana system instruction to transfer funds. Safety checks for the transfer operation are handled by the Solana runtime.
     #[account(mut)]
     pub recipient: AccountInfo<'info>,
     pub system_program: Program<'info, System>,
@@ -74,4 +75,5 @@ pub enum ErrorCode {
 // This file contains the Rust code for the Solana multisig program.
 // It defines the necessary structs, instructions, and error codes for the multisig functionality.
 // The `initialize` instruction sets up the multisig account with the provided owners and threshold.
-// The `execute_transaction` instruction allows executing a transaction with the required number of signers.
+// The `execute_transaction` instruction allows executing a transaction with the required number of signers./// CHECK: The recipient field is used in conjunction with the Solana system instruction to transfer funds. Safety checks for the transfer operation are handled by the Solana runtime.
+/// CHECK: The recipient field is used in conjunction with the Solana system instruction to transfer funds. Safety checks for the transfer operation are handled by the Solana runtime.
