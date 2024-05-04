@@ -1,1 +1,14 @@
 solana program extend PROGRAMID 20000 -u d -k /PATH/TO/id.json
+
+
+solana-keygen new --outfile ~/.config/solana/newIDjson
+
+anchor build
+solana program deploy --upgradeable --program-id ~/.config/solana/id_2.json /home/chris/solana-multisig/solana-multisig
+
+add size:
+solana program extend --7ju5oNN46qCv2q6hNfADv4LhTaBhe3w4MMW88gw29p92 ~/.config/solana/id_2.json 50000 --keypair ~/.config/solana/id.json
+solana program upgrade /path/to/new_program_id.json /path/to/new_program_code.so --keypair /path/to/your_wallet_keypair.json
+
+
+solana transfer ~/.config/solana/id.json  1.8 --from  ~/.config/solana/id_2.json
