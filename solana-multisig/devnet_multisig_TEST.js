@@ -22,14 +22,14 @@ function loadSigners() {
 }
 
 // Main function to send a transaction
-async function sendTransaction() {
+async function sendTransaction(amount) {
     console.log("Attempting to send transaction...");
     const connection = new web3.Connection(web3.clusterApiUrl('devnet'), 'confirmed');
     const signers = loadSigners();
 
     try {
         const transaction = new web3.Transaction();
-        const lamports = web3.LAMPORTS_PER_SOL * 0.001; // Transferring 0.001 SOL
+        const lamports = amount * web3.LAMPORTS_PER_SOL;
 
         console.log("Public Keys of Signers:");
         signers.forEach(signer => {
@@ -56,5 +56,29 @@ async function sendTransaction() {
     }
 }
 
-sendTransaction();
+async function promptAmount() {
+    const readline = require('readline').createInterface({
+        input: process.stdin,
+        output: process.stdout,
+    });
 
+    return new Promise((resolve) => {
+        readline.question('Enter the amount of SOL to transfer: ', (amount) => {
+            readline.close();
+            resolve(parseFloat(amount));
+        });
+    });
+}
+
+async function main() {
+    const amount = await promptAmount();
+    await sendTransaction(amount);
+}
+
+main();
+
+// This script demonstrates sending a multisig transaction on the Solana devnet.
+// It loads the signer keypairs from JSON files and prompts the user to enter the amount of SOL to transfer.
+// The script then constructs a transaction to transfer the specified amount from one signer to another.
+// The transaction is signed by all signers and sent to the Solana devnet for confirmation.
+// The script handles any errors that may occur during the transaction process.
