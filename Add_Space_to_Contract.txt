@@ -1,0 +1,1 @@
+solana program extend PROGRAMID 20000 -u d -k /PATH/TO/id.json

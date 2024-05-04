@@ -3,13 +3,19 @@ use anchor_lang::prelude::*;
 declare_id!("9KaExL5gFjLvE1Z4TRsYDLdguarb6geuo4MaQ6YLk5JB");
 
 const MAX_OWNERS: usize = 4;
-const SPACE: usize = 8 + 4 + 4 + (1100 * MAX_OWNERS);
+const SPACE: usize = 8 + 4 + 4 + (32 * MAX_OWNERS);
 
 #[program]
 pub mod solana_multisig {
     use super::*;
 
+    
     pub fn initialize(ctx: Context<Initialize>, owners: Vec<Pubkey>) -> Result<()> {
+        // Log the size of each component and the total struct size
+        println!("Size of Multisig: {}", std::mem::size_of::<Multisig>());
+        println!("Size of Pubkey: {}", std::mem::size_of::<Pubkey>());
+        println!("Size of u8: {}", std::mem::size_of::<u8>());
+
         let multisig = &mut ctx.accounts.multisig;
         multisig.owners = owners;
         multisig.threshold = MAX_OWNERS as u8;
